@@ -3,7 +3,7 @@ import "../styles/TaylorPolynomials.css";
 import { Mafs, Coordinates, Plot, Text, useMovablePoint, Point, Line } from "mafs";
 import * as math from "mathjs";
 
-function LinearApproximation(props) {
+function QuadraticApproximation(props) {
   let func = props.func;
   let funcString = props.funcString;
   let xrange = props.xrange;
@@ -13,6 +13,7 @@ function LinearApproximation(props) {
   let approxx = props.approxx;
   let labels = props.labels;
   const deriv = math.derivative(funcString, "x");
+  const deriv2 = math.derivative(deriv, "x");
 
   const phase = useMovablePoint([initialx, func(initialx)], {
     constrain: ([x, y]) => [x, func(x)],
@@ -27,13 +28,14 @@ function LinearApproximation(props) {
 //     constrain: "vertical",
 //   })
 
-  function linApprox(x) {
+  function quadApprox(x) {
     const evalderiv = deriv.evaluate({ x: phase.x });
-    return func(phase.x) + evalderiv*(x-phase.x);
+    const evalderiv2 = deriv2.evaluate({ x: phase.x });
+    return func(phase.x) + evalderiv*(x-phase.x) + evalderiv2*((x-phase.x)**2)/2;
   }
 
   function approximationError() {
-      return Math.abs(func(approxx) - linApprox(approxx));
+      return Math.abs(func(approxx) - quadApprox(approxx));
   }
 
   // DERIVATIVE CALCULATIONS
@@ -64,13 +66,13 @@ function LinearApproximation(props) {
         }}
       />
       <Plot.OfX y={(x) => func(x)} />
-      <Plot.OfX y={(x) => linApprox(x)} color="var(--mafs-approx)"/>
+      <Plot.OfX y={(x) => quadApprox(x)} color="var(--mafs-approx)"/>
       {phase.element}
       <Point x={approxx} y={func(approxx)} color="var(--mafs-approxPoint)"/>
-      <Point x={approxx} y={linApprox(approxx)} color="var(--mafs-approxPoint)"/> 
+      <Point x={approxx} y={quadApprox(approxx)} color="var(--mafs-approxPoint)"/> 
       <Line.Segment 
         point1={[approxx, func(approxx)]}
-        point2={[approxx, linApprox(approxx)]}
+        point2={[approxx, quadApprox(approxx)]}
         color="var(--mafs-approxPoint)"
       />
       <Text attach="e" x={-6} y={2.3} size={20}>
@@ -83,12 +85,8 @@ function LinearApproximation(props) {
       <Text attach="e" x={-6} y={-2.5} size={20}>
           x₀ = {phase.x.toFixed(2)}
       </Text>
-
-      {/* <Text attach="e" x={0.3} y={-2.5} size={18} color="var(--mafs-approx)">
-          T(x) = {math.sin(phase.x).toFixed(2)}+{math.cos(phase.x).toFixed(2)}(x-({phase.x.toFixed(2)}))
-      </Text> */}
     </Mafs>
   );
 }
 
-export default LinearApproximation;
+export default QuadraticApproximation;

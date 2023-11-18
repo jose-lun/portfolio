@@ -31,11 +31,11 @@ function TaylorCoordinatePlane(props) {
         xAxis={{
           lines: Math.PI,
           subdivisions: 4,
-          labels: labelPi,
+          labels: false,
         }}
         yAxis={{
           lines: 0.5,
-          labels: half,
+          labels: false,
         }}
       />
       <Plot.OfX y={(x) => func(x)} />

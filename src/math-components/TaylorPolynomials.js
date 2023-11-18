@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../styles/TaylorPolynomials.css";
-import TaylorCoordinatePlane from "../math-components/TaylorCoordinatePlane.js";
+import TaylorCoordinatePlane from "./TaylorCoordinatePlane.js";
 import * as math from "mathjs";
 import { processLatex } from "../helpers/LatexProcessing";
 import ReactModal from "react-modal";
@@ -8,7 +8,7 @@ import ReactModal from "react-modal";
 function TaylorPolynomials() {
   // FUNCTION INFORMATION
 
-  const [cortex, setCortex] = useState("x");
+  const [cortex, setCortex] = useState("sin(x)");
   const processedCortex = processLatex(cortex);
 
   const [funcString, setFuncString] = useState(processedCortex);

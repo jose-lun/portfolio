@@ -18,7 +18,6 @@
   .MafsView text {
     fill: var(--mafs-fg);
     cursor: default;
-    font-size: 25px;
   }
 
 .approx {

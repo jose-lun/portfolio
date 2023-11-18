@@ -9,6 +9,7 @@ function TwoGraphs(props) {
   let xrange = props.xrange;
   let maxV = props.maxV;
   let minV = props.minV;
+  let labels = props.labels;
 
   return (
     <Mafs
@@ -24,12 +25,14 @@ function TwoGraphs(props) {
     >
       <Coordinates.Cartesian
         xAxis={{
-          lines: 1,
-          subdivisions: 1,
+          lines: 2,
+          subdivisions: 2,
+          labels: labels
         }}
         yAxis={{
-          lines: 1,
-          subdivisions: 1,
+          lines: 2,
+          subdivisions: 2,
+          labels: labels
         }}
       />
       <Plot.OfX y={(x) => funcs[0](x)} />   
