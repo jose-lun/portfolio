@@ -1,0 +1,77 @@
+@import "mafs/core.css";
+@import "mafs/font.css";
+@import "computer-modern/cmu-serif.css";
+
+.MafsView {
+    --mafs-bg: #292727;
+    --mafs-line-color: #555;
+    --grid-line-subdivision-color: rgb(117, 117, 117);
+    --mafs-approx: rgb(54, 139, 236);
+    --mafs-point: rgb(238, 238, 238);
+    --mafs-approxPoint: rgb(197, 99, 201);
+    border: 8px solid rgb(94, 94, 94);
+    border-radius: 3px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .MafsView text {
+    fill: var(--mafs-fg);
+    cursor: default;
+    font-size: 25px;
+  }
+
+.approx {
+    --mafs-line-color: rgb(133, 10, 10);
+}
+
+math-field {
+    box-sizing: border-box;
+    padding: 0.5em;
+    margin: 0px 20px 0px 10px;
+    font-size: 1em;
+    border-radius: 8px;
+    border: 1px solid #999;
+  }
+
+/* Hide the virtual keyboard toggle */
+math-field::part(virtual-keyboard-toggle) {
+  display: none;
+}
+
+
+  .modal {
+    position: fixed;
+
+    left: 30%;
+    right: 30%;
+    top: 40%;
+
+    width: auto;
+
+    border: 0px solid #011627;
+    border-radius: 1em;
+    padding: 10px;
+
+    background-color: #FDFFFC;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    color: #011627;
+  }
+
+  .ReactModal__Overlay {
+    opacity: 0;
+    transition: opacity 0.1s ease-in-out;
+}
+
+.ReactModal__Overlay--after-open{
+    opacity: 1;
+}
+
+.ReactModal__Overlay--before-close{
+    opacity: 0;
+}

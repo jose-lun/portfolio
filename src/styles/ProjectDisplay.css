@@ -1,0 +1,103 @@
+@font-face {
+  font-family: "KaTeX_Main";
+  src: url(KaTeX_Main-Regular.woff2) format('woff2'), url(KaTeX_Main-Regular.woff) format('woff'), url(KaTeX_Main-Regular.ttf) format('truetype');
+  font-weight: normal;
+  font-style: italic;
+  unicode-range: U+0020-002F, U+003A-007F;
+}
+
+@font-face {
+  font-family: "KaTeX_Main";
+  src: url(KaTeX_Main-Regular.woff2) format('woff2'), url(KaTeX_Main-Regular.woff) format('woff'), url(KaTeX_Main-Regular.ttf) format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+.project {
+    width: 100%;
+    /* height: calc(100vh - 100px); */
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 125px;
+    margin-bottom: 125px;
+  }
+  
+  .project h1 {
+    color: #3e497a;
+    font-size: 35px;
+    font-weight: 600;
+    text-align: center;
+  }
+
+
+  .project img {
+    width: 700px;
+    border-radius: 10px;
+    color: #98a5df
+  }
+
+  .project svg {
+    font-size: 60px;
+    color: #3e497a;
+  }
+
+  .project p {
+    font-size: 30px;
+    /* font-family: "CMU Serif", serif; */
+    font-style: none;
+    color: black;
+  }
+
+  .lesson p {
+    font-size: 25px;
+    margin-top: 20px;
+    margin-left: 20%;
+    margin-right: 20%;
+    text-align: left;
+    line-height: 1.8;
+  }
+
+  .lesson h1 {
+    text-align: center;
+    margin-bottom: 50px;
+    margin-top: 50px;
+  }
+  
+  .italic {
+    font-style: italic;
+  }
+
+  .bold {
+    font-weight: 600;
+  }
+
+  .mathy {
+    font-size: 0.7em;
+  }
+
+  .math {
+    font-family: "CMU Serif", serif;
+    text-align: center;
+  }
+
+  .latexblock {
+    margin-top: 0px;
+  }
+  
+  .project button {
+    background-color: #292727;
+    color: white;
+    font-size: 25px;
+    font-family: "CMU Serif", serif;
+    padding: 10px 30px;
+    border-radius: 5px;
+    margin: 10px 10px;
+    cursor: pointer;
+  }
+  
+  .project button:hover {
+    background-color: #463f3f;
+  }
