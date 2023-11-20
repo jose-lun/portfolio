@@ -5,7 +5,6 @@ import { Mafs, Coordinates, Plot } from "mafs";
 function TwoGraphs(props) {
     // only difference from RegularGraph is that FUNCS is an array of functions!
   let funcs = props.funcs;
-  console.log(funcs);
   let xrange = props.xrange;
   let maxV = props.maxV;
   let minV = props.minV;

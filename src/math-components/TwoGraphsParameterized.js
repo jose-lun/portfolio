@@ -3,7 +3,7 @@ import "../styles/TaylorPolynomials.css";
 import { Mafs, Coordinates, Plot } from "mafs";
 
 // only difference from TwoGraphs is that the second function has a slider variable
-function TwoGraphsSlider(props) {
+function TwoGraphsParameterized(props) {
   let funcs = props.funcs;
   let xrange = props.xrange;
   let maxV = props.maxV;
@@ -41,4 +41,4 @@ function TwoGraphsSlider(props) {
   );
 }
 
-export default TwoGraphsSlider;
+export default TwoGraphsParameterized;

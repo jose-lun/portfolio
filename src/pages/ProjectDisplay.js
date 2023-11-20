@@ -8,8 +8,8 @@ import ParametricPlot from "../math-components/ParametricPlot";
 import LinearApproximation from "../math-components/LinearApproximation";
 import { ital, bold, mathy, latexblock } from "../helpers/formattingHelpers";
 import TwoGraphs from "../math-components/TwoGraphs";
-import TwoGraphsSlider from "../math-components/TwoGraphsSlider";
 import QuadraticApproximation from "../math-components/QuadraticApproximation";
+import FresnelApproximation from "../math-components/FresnelApproximation";
 
 function ProjectDisplay() {
   const { id } = useParams();
@@ -43,13 +43,9 @@ function ProjectDisplay() {
     return fresnel(x)[1];
   }
 
-  function factorial(x) {
-    return (x > 1) ? x * factorial(x-1) : 1;
-  }
-
-  function fresnelApprox(x, l) {
+  function fresnelApprox(x) {
     let total = 0;
-    for (let n = 0; n <= l; n++) {
+    for (let n = 0; n <= 2; n++) {
       let numerator = Math.pow(-1, n) * Math.pow(x, 4 * n + 3);
       let denominator = factorial(4 * n + 3) * factorial(2 * n + 1);
       
@@ -57,6 +53,11 @@ function ProjectDisplay() {
     }
     return total;
   } 
+
+  function factorial(x) {
+    return (x > 1) ? x * factorial(x-1) : 1;
+  }
+
 
   // LINEAR APPROXIMATIONS
 
@@ -430,14 +431,17 @@ function ProjectDisplay() {
       </div>
 
       <div className="math">
-          <TwoGraphsSlider
+          <TwoGraphs
             funcs={[fresnelx, fresnelApprox]}
-            xrange={Math.PI * 2}
+            xrange={5}
             maxV={3}
             minV={-3}
             labels={false}
-            numTerms={1}
           />
+      </div>
+
+      <div>
+        
       </div>
 
   </div>;
