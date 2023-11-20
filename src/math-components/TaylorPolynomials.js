@@ -4,11 +4,12 @@ import TaylorCoordinatePlane from "./TaylorCoordinatePlane.js";
 import * as math from "mathjs";
 import { processLatex } from "../helpers/LatexProcessing";
 import ReactModal from "react-modal";
+import { mathy } from "../helpers/formattingHelpers"
 
 function TaylorPolynomials() {
   // FUNCTION INFORMATION
 
-  const [cortex, setCortex] = useState("sin(x)");
+  const [cortex, setCortex] = useState("\\sin(x)");
   const processedCortex = processLatex(cortex);
 
   const [funcString, setFuncString] = useState(processedCortex);
@@ -75,26 +76,26 @@ function TaylorPolynomials() {
 
   // FINDS MINIMUM VALUE OF FUNCTION IN XRANGE
 
-  function minValue() {
-    let minV = 0;
-    for (let i = -xrange; i <= xrange; i += 0.5) {
-      if (func(i) < minV) {
-        minV = func(i);
-      }
-    }
-    return Math.max(minV - 2, -10);
-  }
+  // function minValue() {
+  //   let minV = 0;
+  //   for (let i = -xrange; i <= xrange; i += 0.5) {
+  //     if (func(i) < minV) {
+  //       minV = func(i);
+  //     }
+  //   }
+  //   return Math.max(minV - 2, -10);
+  // }
 
   // FINDS MAXIMUM VALUE OF FUNCTION IN XRANGE
-  function maxValue() {
-    let maxV = 0;
-    for (let i = -xrange; i <= xrange; i += 0.5) {
-      if (func(i) > maxV) {
-        maxV = func(i);
-      }
-    }
-    return Math.min(maxV + 2, 10);
-  }
+  // function maxValue() {
+  //   let maxV = 0;
+  //   for (let i = -xrange; i <= xrange; i += 0.5) {
+  //     if (func(i) > maxV) {
+  //       maxV = func(i);
+  //     }
+  //   }
+  //   return Math.min(maxV + 2, 10);
+  // }
 
   // TAYLOR APPROXIMATION FOR FUNCTION OF Nth DEGREE
   function taylor(arg, degree, a) {
@@ -161,7 +162,7 @@ function TaylorPolynomials() {
 
   return (
     <div>
-      <p> <span className="italic">f(x)=</span>
+      <p className="function-input"> {mathy('f(x) = ')}
       <math-field onInput={(e) => setCortex(e.target.value)}
       >
         {cortex}

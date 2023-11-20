@@ -6,8 +6,9 @@ import TaylorPolynomials from "../math-components/TaylorPolynomials";
 import 'katex/dist/katex.min.css';
 import ParametricPlot from "../math-components/ParametricPlot";
 import LinearApproximation from "../math-components/LinearApproximation";
-import { ital, bold, boldital, mathy, latexblock } from "../helpers/formattingHelpers";
+import { ital, bold, mathy, latexblock } from "../helpers/formattingHelpers";
 import TwoGraphs from "../math-components/TwoGraphs";
+import TwoGraphsSlider from "../math-components/TwoGraphsSlider";
 import QuadraticApproximation from "../math-components/QuadraticApproximation";
 
 function ProjectDisplay() {
@@ -24,9 +25,9 @@ function ProjectDisplay() {
   const tangentLineX0 = `T(x) = \\sin\\left(x_0\\right) + \\cos\\left(x_0\\right) \\cdot \\left(x-x_0\\right)`;
   const tangentLineGeneral = `T(x) = f\\left(x_0\\right) + f'\\left(x_0\\right) \\cdot \\left(x-x_0\\right)`;
 
-  const TxDerivative = `T'(x) = \\frac{d}{dx} \[f\\left(x_0\\right) + f'\\left(x_0\\right) \\cdot \\left(x-x_0\\right)\]`;
-  const TxDerivative2 = `\\hspace{3cm} = \\frac{d}{dx} \[f(x_0)\] + \\frac{d}{dx} \[f'(x_0) \\cdot x\]  - \\frac{d}{dx} \[f'(x_0) \\cdot x_0\]`;
-  const TxDerivative3 = ` = \\frac{d}{dx} \[f'(x_0) \\cdot x\] = f'(x_0) \\hspace{0.1cm}`;
+  const TxDerivative = `T'(x) = \\frac{d}{dx} [f\\left(x_0\\right) + f'\\left(x_0\\right) \\cdot \\left(x-x_0\\right)]`;
+  const TxDerivative2 = `\\hspace{3cm} = \\frac{d}{dx} [f(x_0)] + \\frac{d}{dx} [f'(x_0) \\cdot x]  - \\frac{d}{dx} [f'(x_0) \\cdot x_0]`;
+  const TxDerivative3 = ` = \\frac{d}{dx} [f'(x_0) \\cdot x] = f'(x_0) \\hspace{0.1cm}`;
 
   const TxSecondOrder = `T_{2}(x) = f\\left(x_0\\right) + f'\\left(x_0\\right) \\cdot \\left(x-x_0\\right) + \\frac{f''(x_0) \\cdot (x-x_0)^2}{2}`
   const TxThirdOrder = `T_{3}(x) = f\\left(x_0\\right) + f'\\left(x_0\\right) \\cdot \\left(x-x_0\\right) + \\frac{f''(x_0) \\cdot (x-x_0)^2}{2} + \\frac{f'''(x_0) \\cdot (x-x_0)^3}{6}`
@@ -42,11 +43,26 @@ function ProjectDisplay() {
     return fresnel(x)[1];
   }
 
+  function factorial(x) {
+    return (x > 1) ? x * factorial(x-1) : 1;
+  }
+
+  function fresnelApprox(x, l) {
+    let total = 0;
+    for (let n = 0; n <= l; n++) {
+      let numerator = Math.pow(-1, n) * Math.pow(x, 4 * n + 3);
+      let denominator = factorial(4 * n + 3) * factorial(2 * n + 1);
+      
+      total += numerator / denominator;
+    }
+    return total;
+  } 
+
   // LINEAR APPROXIMATIONS
 
-  function func2(x) {
-    return Math.sin(x**2);
-  }
+  // function func2(x) {
+  //   return Math.sin(x**2);
+  // }
 
   function sinTangent(x) {
     return x;
@@ -69,13 +85,13 @@ function ProjectDisplay() {
         The Taylor Series is a concept that is fundamental to modern math and science. But too often, it is introduced as an abstract formula,
         with little or no explanation of why it works and why it's even important. In this lesson,
         we will explore the intuition and motivation behind the Taylor Series, constructing the formula from the ground up.
-        As a motivating example, consider the following function, known as a <a href="https://en.wikipedia.org/wiki/Fresnel_integral" target="_blank">Fresnel Integral</a>:
+        As a motivating example, consider the following function, known as a <a href="https://en.wikipedia.org/wiki/Fresnel_integral" target="_blank" rel="noreferrer">Fresnel Integral</a>:
         </p>
 
         {latexblock(fresnelIntegral)}
 
         <p>This function has many uses in physics, from calculating electromagnetic diffraction,
-          to highway engineering, rollercoaster design, and drawing this <a href="https://en.wikipedia.org/wiki/Euler_spiral" target="_blank">cool spiral</a>:</p> 
+          to highway engineering, rollercoaster design, and drawing this <a href="https://en.wikipedia.org/wiki/Euler_spiral" target="_blank" rel="noreferrer">cool spiral</a>:</p> 
       </div>
 
       <div className="math">
@@ -96,7 +112,7 @@ function ProjectDisplay() {
         <p>The problem is, in order to test some values of this function, we need to compute the integral.
           We could try finding the {ital('indefinite integral')} — via U-substitution, partial fractions, integration by parts, etc. — then 
           evaluating at the endpoints to get a number. However, it turns out 
-          this is <a href="https://en.wikipedia.org/wiki/Nonelementary_integral" target="_blank">an impossible task. </a>
+          this is <a href="https://en.wikipedia.org/wiki/Nonelementary_integral" target="_blank" rel="noreferrer">an impossible task. </a>
         </p>
 
         <p>So are we doomed? Well, if we can't find an exact solution to this integral, the next best thing
@@ -158,7 +174,7 @@ function ProjectDisplay() {
         {latexblock(sinDerivativeX0)}
 
         <p>
-          Then, using <a href="https://www.mathsisfun.com/algebra/line-equation-point-slope.html" target="_blank">point slope form</a>,
+          Then, using <a href="https://www.mathsisfun.com/algebra/line-equation-point-slope.html" target="_blank" rel="noreferrer">point slope form</a>,
           we find that the equation of the tangent line approximation centered at {mathy('x=x_0')} is:
         </p>
 
@@ -311,7 +327,7 @@ function ProjectDisplay() {
         </h1>
 
         <p>
-          One natural question to ask at this point is, {ital('how far can we take this?')}. So far, we've defined a polynomial that matches
+          One natural question to ask at this point is, {ital('how far can we take this?')} So far, we've defined a polynomial that matches
           up to {mathy('n')} derivatives of a function. But what if we matched them all? For an infinitely-differentiable function 
           like {mathy('\\sin(x)')}, this would mean taking the limit of our expression as {mathy('n \\to \\infty')}:
         </p>
@@ -319,7 +335,7 @@ function ProjectDisplay() {
         {latexblock(`\\lim_{n \\to \\infty} T_{n}(x) = \\sum_{n=0}^{\\infty} \\frac{f^{(n)}(x_0)(x-x_0)^n}{n!}`)}
 
         <p>
-          This is known as the {ital('Taylor Series')} of {mathy('f(x)')}. For <a href="https://en.wikipedia.org/wiki/Entire_function" target="_blank">most functions</a>, this series will
+          This is known as the {ital('Taylor Series')} of {mathy('f(x)')}. For <a href="https://en.wikipedia.org/wiki/Entire_function" target="_blank" rel="noreferrer">most functions</a>, this series will
           exactly equal our original function, {ital('regardless of where we center it')}. So we can do away with our clunky {mathy('(x-x_0)')} notation and just center our
           series at 0. Then, we can write
         </p>
@@ -337,14 +353,91 @@ function ProjectDisplay() {
         {latexblock(fresnelIntegral)}
 
         <p>
-          Using our new approximation superpowers, we can replace {mathy('\\sin(x)')} in our integral by the Taylor Series of {mathy('\\sin(x)')}.
-          Finding a closed-form expression for the Taylor Series of a specific function can be time-consuming, but I recommend that you calculate this
-          Taylor Series on your own (by taking successive derivatives of {mathy('\\sin(x)')} and plugging in 0, you will see a pattern emerge).
+          Using our new approximation superpowers, we can replace {mathy('\\sin(t^2)')} in our integral by the Taylor Series of {mathy('\\sin(t^2)')}. To find this, 
+          we will start with the Taylor Series for {mathy('\\sin(t)')} and replace {mathy('t')} with {mathy('t^2')}.
+        </p>
+        <p>
+          Finding a closed-form expression for the Taylor Series of a specific function can be time-consuming, but I recommend that you calculate the series 
+          for {mathy('\\sin(x)')} on your own (by taking successive derivatives of {mathy('\\sin(t)')} and plugging in {mathy('0')}, you will see a pattern 
+          emerge).
+        </p>
+
+        <p>
           For now, we will skip the derivation and present the series:
         </p>
 
-        {latexblock(`\\sin(x) = \\sum_{n=0}^{\\infty} \\frac{(-1)^{n} \\hspace{0.1cm} x^{2n+1}}{(2n+1)!}`)}
+        {latexblock(`\\sin(t) = \\sum_{n=0}^{\\infty} \\frac{(-1)^{n} \\hspace{0.1cm} t^{2n+1}}{(2n+1)!}`)}
 
+        <p>
+          Replacing {mathy('t')} with {mathy('t^2')}:
+        </p>
+
+        {latexblock(`\\sin(t^2) = \\sum_{n=0}^{\\infty} \\frac{(-1)^{n} \\hspace{0.1cm} (t^2)^{2n+1}}{(2n+1)!} = \\sum_{n=0}^{\\infty} \\frac{(-1)^{n} \\hspace{0.1cm} t^{4n+2}}{(2n+1)!}`)}
+
+        <p>
+          This may look intimidating, but if we expand out the terms, we see it's actually quite a simple pattern:
+        </p>
+
+        {latexblock(`\\sin(t^2) = \\frac{x^2}{1!} + \\frac{x^6}{3!} + \\frac{x^{10}}{5!} + \\frac{x^{14}}{7!} + ...`)}
+
+        <p>
+          Plugging into our Fresnel integral, we get:
+        </p>
+
+        {latexblock(`S(x) = \\int_{0}^{x} \\sum_{n=0}^{\\infty} \\frac{(-1)^{n} \\hspace{0.1cm} t^{4n+2}}{(2n+1)!} dt`)}
+
+        <p>
+         For <a href='https://en.wikipedia.org/wiki/Dominated_convergence_theorem' target='_blank' rel='noreferrer'>reasons</a> that are outside the 
+         scope of this lesson, we can switch the order of the sum and the integral:
+        </p>
+
+        {latexblock(`S(x) = \\sum_{n=0}^{\\infty} \\int_{0}^{x} \\frac{(-1)^{n} \\hspace{0.1cm} t^{4n+2}}{(2n+1)!} dt`)}
+
+        <p>
+         The {mathy('n')}-terms are constant with respect to {mathy('t')}, so we can pull them out of the integral:
+        </p>
+
+        {latexblock(`S(x) = \\sum_{n=0}^{\\infty} \\frac{(-1)^{n}}{(2n+1)!} \\int_{0}^{x} t^{4n+2} dt`)}
+
+        <p>
+         Then evaluate the definite integral by our usual methods:
+        </p>
+
+        {latexblock(`\\int_{0}^{x} t^{4n+2} dt = \\frac{t^{4n+3}}{4n+3} \\bigg\\vert_{0}^{x} = \\frac{x^{4n+3}}{4n+3}`)}
+
+        <p>
+         And putting it all together:
+        </p>
+
+        {latexblock(`S(x) = \\sum_{n=0}^{\\infty} \\frac{(-1)^{n} \\hspace{0.1cm} x^{4n+3}}{(2n+1)! \\hspace{0.1cm} (4n+3)} = \\frac{x^3}{3} - \\frac{x^7}{42} + \\frac{x^{11}}{1320} - \\frac{x^{15}}{75600} + ...`)}
+
+        <p>
+         We now have an infinite polynomial that exactly equals {mathy('S(x)')} for all inputs! We can truncate this polynomial at any point to calculate
+         approximate values. Remember, however, that this polynomial is centered at {mathy('0')}, so if we want to approximate values far away 
+         from {mathy('0')} we will need many terms. 
+        </p>
+
+        <p>
+         Let's calculate {mathy('S(1)')}, using the first 2 terms:
+        </p>
+
+        {latexblock(`S(1) \\approx \\frac{(1)^3}{3} - \\frac{(1)^7}{42} = 0.3095`)}
+
+        <p>
+         The actual value is {mathy('0.3013')}. Not bad! We can visualize how the accuracy of our approximation increases as we add more terms:
+        </p>
+        
+      </div>
+
+      <div className="math">
+          <TwoGraphsSlider
+            funcs={[fresnelx, fresnelApprox]}
+            xrange={Math.PI * 2}
+            maxV={3}
+            minV={-3}
+            labels={false}
+            numTerms={1}
+          />
       </div>
 
   </div>;

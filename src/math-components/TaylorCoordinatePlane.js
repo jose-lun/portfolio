@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/TaylorPolynomials.css";
-import { Mafs, Coordinates, labelPi, Plot, useMovablePoint } from "mafs";
+import { Mafs, Coordinates, Plot, useMovablePoint } from "mafs";
 
 function TaylorCoordinatePlane(props) {
   let func = props.func;
@@ -48,10 +48,10 @@ function TaylorCoordinatePlane(props) {
 }
 //<Plot.OfX y={(x) => Math.sin(phase.x)+Math.cos(phase.x)*(x-phase.x)} color="var(--mafs-approx)"/>
 
-function half(n) {
-  if (n % 1 == 0) {
-    return n;
-  }
-}
+// function half(n) {
+//   if (n % 1 == 0) {
+//     return n;
+//   }
+// }
 
 export default TaylorCoordinatePlane;

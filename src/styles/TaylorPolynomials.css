@@ -24,6 +24,10 @@
     --mafs-line-color: rgb(133, 10, 10);
 }
 
+.function-input {
+  margin-top: 0px;
+}
+
 math-field {
     box-sizing: border-box;
     padding: 0.5em;
