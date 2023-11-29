@@ -43,20 +43,20 @@ function ProjectDisplay() {
     return fresnel(x)[1];
   }
 
-  function fresnelApprox(x) {
-    let total = 0;
-    for (let n = 0; n <= 2; n++) {
-      let numerator = Math.pow(-1, n) * Math.pow(x, 4 * n + 3);
-      let denominator = factorial(4 * n + 3) * factorial(2 * n + 1);
+  // function fresnelApprox(x) {
+  //   let total = 0;
+  //   for (let n = 0; n <= 0; n++) {
+  //     let numerator = Math.pow(-1, n) * Math.pow(x, (4 * n) + 3);
+  //     let denominator = factorial((2 * n) + 1) * ((4 * n )+ 3);
       
-      total += numerator / denominator;
-    }
-    return total;
-  } 
+  //     total += numerator / denominator;
+  //   }
+  //   return total;
+  // } 
 
-  function factorial(x) {
-    return (x > 1) ? x * factorial(x-1) : 1;
-  }
+  // function factorial(x) {
+  //   return (x > 1) ? x * factorial(x-1) : 1;
+  // }
 
 
   // LINEAR APPROXIMATIONS
@@ -431,18 +431,12 @@ function ProjectDisplay() {
       </div>
 
       <div className="math">
-          <TwoGraphs
-            funcs={[fresnelx, fresnelApprox]}
-            xrange={5}
-            maxV={3}
-            minV={-3}
-            labels={false}
-          />
+        <FresnelApproximation />
       </div>
 
-      <div>
-        
-      </div>
+      <h1>
+          Euler Spiral
+      </h1>
 
   </div>;
 }

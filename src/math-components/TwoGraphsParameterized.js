@@ -21,7 +21,8 @@ function TwoGraphsParameterized(props) {
         padding: 0,
       }}
       preserveAspectRatio={false}
-      zoom={true}
+      zoom={false}
+      pan={false}
     >
       <Coordinates.Cartesian
         xAxis={{
