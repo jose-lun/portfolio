@@ -9,6 +9,8 @@ function TwoGraphs(props) {
   let maxV = props.maxV;
   let minV = props.minV;
   let labels = props.labels;
+  let pan = props.pan;
+  let zoom = props.zoom;
 
   return (
     <Mafs
@@ -20,7 +22,8 @@ function TwoGraphs(props) {
         padding: 0,
       }}
       preserveAspectRatio={false}
-      zoom={true}
+      zoom={zoom}
+      pan={pan}
     >
       <Coordinates.Cartesian
         xAxis={{

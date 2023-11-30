@@ -10,6 +10,7 @@ import { ital, bold, mathy, latexblock } from "../helpers/formattingHelpers";
 import TwoGraphs from "../math-components/TwoGraphs";
 import QuadraticApproximation from "../math-components/QuadraticApproximation";
 import FresnelApproximation from "../math-components/FresnelApproximation";
+import ParametricPlotSlider from "../math-components/ParametricPlotSlider";
 
 function ProjectDisplay() {
   const { id } = useParams();
@@ -43,28 +44,6 @@ function ProjectDisplay() {
     return fresnel(x)[1];
   }
 
-  // function fresnelApprox(x) {
-  //   let total = 0;
-  //   for (let n = 0; n <= 0; n++) {
-  //     let numerator = Math.pow(-1, n) * Math.pow(x, (4 * n) + 3);
-  //     let denominator = factorial((2 * n) + 1) * ((4 * n )+ 3);
-      
-  //     total += numerator / denominator;
-  //   }
-  //   return total;
-  // } 
-
-  // function factorial(x) {
-  //   return (x > 1) ? x * factorial(x-1) : 1;
-  // }
-
-
-  // LINEAR APPROXIMATIONS
-
-  // function func2(x) {
-  //   return Math.sin(x**2);
-  // }
-
   function sinTangent(x) {
     return x;
   }
@@ -79,7 +58,7 @@ function ProjectDisplay() {
       <div className="lesson">
 
         <p>
-          {ital('Note: this lesson assumes an understanding of polynomials, trigonometric functions, and simple calculus.')}
+          {ital('Note: this lesson assumes an understanding of polynomials, trigonometric functions, simple calculus and parameterization.')}
         </p>
 
         <p> 
@@ -162,6 +141,8 @@ function ProjectDisplay() {
             maxV={3}
             minV={-3}
             labels={false}
+            pan={false}
+            zoom={false}
           />
       </div>
 
@@ -437,6 +418,66 @@ function ProjectDisplay() {
       <h1>
           Euler Spiral
       </h1>
+
+      <div className="lesson">
+
+        <p>
+          You may still be wondering about how to draw that spiral from the beginning of the lesson. 
+          Well, the Fresnel Integral we have been working with is only half of the picture.
+          It turns out there are actually two separate (but related) Fresnel Integrals, defined as:
+        </p>
+
+        {latexblock(fresnelIntegral)}
+        {latexblock(`C(x) = \\int_{0}^{x} \\cos\\left(t^2\\right) \\, dt`)}
+
+        <p>
+          We focused on {mathy('S(x)')} this lesson, but the same principles apply to approximating {mathy('C(x)')}. There are many ways we can 
+          visualize these two functions to explore their relationship. For one, we could simply graph them on the same plane:
+        </p>
+      </div>
+
+      <div className="math">
+          <TwoGraphs
+            funcs={[fresnelx, fresnely]}
+            xrange={Math.PI * 1.5}
+            maxV={2.5}
+            minV={-2.5}
+            labels={false}
+            pan={false}
+            zoom={false}
+          />
+      </div>
+
+      <div className="lesson">
+        <p>
+          But a more interesting method is to define a parameter {mathy('p')} and create a unified <a href="https://en.wikipedia.org/wiki/Parametric_equation" target="_blank" rel="noreferrer">parametric function</a> that 
+          uses {mathy('S(p)')} as its {mathy('x')}-value and {mathy('C(p)')} as its {mathy('y')}-value. If this is unfamiliar, I encourage you to check out <a href="https://tutorial.math.lamar.edu/classes/calcii/parametriceqn.aspx" target="_blank" rel="noreferrer">this great resource</a>.
+          Our parametric function looks like this:
+        </p>
+
+        {latexblock(`\\left(x(p), y(p)\\right) = \\left(\\int_{0}^{p} \\sin\\left(t^2\\right) \\, dt, \\int_{0}^{p} \\cos\\left(t^2\\right) \\, dt \\right)`)}
+
+        <p>
+          Now we can let {mathy('p')} range from between whatever endpoints we choose, and this will draw our spiral:
+        </p>
+      </div>
+      <div className="math">
+          <ParametricPlotSlider
+            xfunc={fresnelx}
+            yfunc={fresnely}
+            xrange={1}
+            maxV={1}
+            minV={-1}
+          />
+      </div>
+
+      <div className="lesson">
+        <p>
+          And we're done! This is a vast and complex topic, worthy of an entire textbook, so don't worry if some of the details
+          are still unclear. Hopefully you came out of this with a better understanding of the Taylor Series, and how it can help us solve 
+          otherwise unsolvable problems. Thank you for reading!
+        </p>
+      </div>
 
   </div>;
 }
