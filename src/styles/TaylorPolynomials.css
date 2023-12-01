@@ -42,6 +42,11 @@ math-field::part(virtual-keyboard-toggle) {
   display: none;
 }
 
+/* Hide the menu toggle */
+math-field::part(menu-toggle) {
+  display: none;
+}
+
 
   .modal {
     position: fixed;
