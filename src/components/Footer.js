@@ -10,7 +10,7 @@ function Footer() {
         <InstagramIcon />
         <LinkedInIcon />
       </div>
-      <p> &copy; 2023 jose-luna.com</p>
+      <p> &copy; 2026 jose-luna.com</p>
     </div>
   );
 }
